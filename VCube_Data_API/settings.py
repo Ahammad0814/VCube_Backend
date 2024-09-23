@@ -35,21 +35,18 @@ DEBUG = True
 
 X_FRAME_OPTIONS = 'DENY'
 
-ALLOWED_HOSTS = [
-    '127.0.0.1', 
-    'v-cube.vercel.app',
+ALLOWED_HOSTS = [ 
+    'vcube.onrender.com',
     'vcube-backend-api.onrender.com',
 ]
 
 CORS_ALLOWED_ORIGINS = [
-    'http://127.0.0.1:8000',
-    'https://v-cube.vercel.app',
+    'https://vcube.onrender.com',
     'https://vcube-backend-api.onrender.com',
 ]
 
 CSRF_TRUSTED_ORIGINS = [
-    'http://127.0.0.1:8000',
-    'https://v-cube.vercel.app',
+    'https://vcube.onrender.com',
     'https://vcube-backend-api.onrender.com',
 ]
 
@@ -87,10 +84,10 @@ SESSION_COOKIE_SECURE = True
 CSRF_COOKIE_SECURE = True
 
 CSP_DEFAULT_SRC = ["'self'"]
-CSP_SCRIPT_SRC = ["'self'", "http://localhost:3000","https://v-cube.vercel.app"]
-CSP_STYLE_SRC = ["'self'", "http://localhost:3000","https://v-cube.vercel.app"]
-CSP_IMG_SRC = ["'self'", "http://localhost:3000","https://v-cube.vercel.app"]
-CSP_CONNECT_SRC = ["'self'", "http://localhost:3000","https://v-cube.vercel.app"]
+CSP_SCRIPT_SRC = ["'self'", "https://vcube.onrender.com"]
+CSP_STYLE_SRC = ["'self'", "https://vcube.onrender.com"]
+CSP_IMG_SRC = ["'self'", "https://vcube.onrender.com"]
+CSP_CONNECT_SRC = ["'self'", "https://vcube.onrender.com"]
 
 
 ROOT_URLCONF = 'VCube_Data_API.urls'
