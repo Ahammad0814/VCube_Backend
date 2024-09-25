@@ -142,7 +142,7 @@ class SendMail(models.Model):
     Email = models.CharField(max_length=255)
     OTP = models.JSONField(default=dict)
 
-class ReportData(models.Model):
+class Report_Data(models.Model):
     Date = models.CharField(max_length=255, default='N/A')
     Error_Type = models.TextField(default='N/A')
     Error_Message = models.TextField(default='N/A')
