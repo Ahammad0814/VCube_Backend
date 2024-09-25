@@ -64,7 +64,7 @@ class StudentWatchTimeData(models.Model):
     Course = models.CharField(max_length=255, default='N/A')
     BatchName = models.CharField(max_length=255, default='N/A')
     Date = models.CharField(max_length=255, default='N/A')
-    VedioDetails = models.TextField()
+    WatchTime = models.CharField(max_length=255, default='N/A')
 
 class CoursesData(models.Model):
     Course = models.CharField(max_length=255,default='N/A')
