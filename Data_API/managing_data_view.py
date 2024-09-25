@@ -71,7 +71,7 @@ class ManagingDataView(APIView):
         'student_watchtime' : (StudentWatchTimeData, StudentWatchTimeDataSerializer),
         'permissions_data' : (PermissionsData, PermissionsDataSerializer),
         'feedbackforms-list' : (FeedbackFormLists, FeedbackFormListsSerializer),
-        'report-data' : (ReportData, ReportDataSerializer),
+        'report-data' : (Report_Data, ReportDataSerializer),
     }
 
     def get_model_and_serializer(self, model_name):
