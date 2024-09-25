@@ -25,7 +25,7 @@ from .models import (
     StudentWatchTimeData,
     PermissionsData,
     FeedbackFormLists,
-    ReportData,
+    Report_Data,
 )
 from .serializers import (
     BatchDataSerializer,
