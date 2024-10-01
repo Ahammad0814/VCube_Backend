@@ -219,11 +219,14 @@ class StudentConfigDataView(APIView):
                 if connection.is_connected():
                     connection.close()
                 else:
+                    print('Failed to connect to the database')
                     return JsonResponse({"status": "error", "message": "Failed to connect to the database"}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
             except Error as e:
+                print(str(e))
                 return JsonResponse({"status": "error", "message": f"Database connection error: {str(e)}"}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
         except Exception as e:
+            print(str(e))
             return JsonResponse({"status": "error", "message": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
         try:
@@ -236,5 +239,6 @@ class StudentConfigDataView(APIView):
             else:
                 return Response({"status": "error", "message": "Student not found"}, status=status.HTTP_404_NOT_FOUND)
         except Exception as e:
+            print(str(e))
             return JsonResponse({"status": "error", "message": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
