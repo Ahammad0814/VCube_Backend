@@ -64,17 +64,6 @@ class StudentLoginView(APIView):
         else:
             return Response({"error": "Invalid Details"}, status=status.HTTP_401_UNAUTHORIZED)
 
-
-
-
-class DeleteAllStudentsData(APIView):
-
-    def delete(self, request):
-        StudentData.objects.all().delete()
-        return Response(status=status.HTTP_204_NO_CONTENT)
-        
-        
-
 class CheckStudentMailView(APIView):
     
     def post(self, request):
