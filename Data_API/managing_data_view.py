@@ -25,7 +25,9 @@ from .models import (
     StudentWatchTimeData,
     PermissionsData,
     FeedbackFormLists,
-    Report_Data,
+    ReportData,
+    StudentWeeklyTestResults,
+    StudentRequests
 )
 from .serializers import (
     BatchDataSerializer,
@@ -46,6 +48,8 @@ from .serializers import (
     PermissionsDataSerializer,
     FeedbackFormListsSerializer,
     ReportDataSerializer,
+    StudentWeeklyTestResultsSerializer,
+    StudentRequestsSerializer
 )
 
 
@@ -71,7 +75,9 @@ class ManagingDataView(APIView):
         'student_watchtime' : (StudentWatchTimeData, StudentWatchTimeDataSerializer),
         'permissions_data' : (PermissionsData, PermissionsDataSerializer),
         'feedbackforms-list' : (FeedbackFormLists, FeedbackFormListsSerializer),
-        'report-data' : (Report_Data, ReportDataSerializer),
+        'report-data' : (ReportData, ReportDataSerializer),
+        'weekly-test-results' : (StudentWeeklyTestResults, StudentWeeklyTestResultsSerializer),
+        'weekly-test-requests' : (StudentRequests, StudentRequestsSerializer)
     }
 
     def get_model_and_serializer(self, model_name):
@@ -86,7 +92,7 @@ class ManagingDataView(APIView):
         
         if id is not None:
             try:
-                if model_name in ['student_attendance', 'student_watchtime', 'batch_to_student_messages']:
+                if model_name in ['student_attendance', 'student_watchtime', 'batch_to_student_messages','weekly-test-results','weekly-test-requests']:
                     instances = model.objects.filter(StudentId=id)
                 elif model_name == 'batch_attendance':
                     instances = model.objects.filter(BatchID=id)
