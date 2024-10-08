@@ -6,8 +6,8 @@ from rest_framework_simplejwt.tokens import RefreshToken
 from rest_framework_simplejwt.tokens import AccessToken
 from django.utils import timezone
 from datetime import timedelta
-from .models import StudentData, PermissionsData
-from .serializers import StudentDataSerializer
+from .models import StudentData, PermissionsData, SendOTP
+from .serializers import StudentDataSerializer, SendOTPSerializer
 from .decorators import token_required
 from cryptography.fernet import Fernet
 from django.http import JsonResponse
@@ -19,6 +19,8 @@ from dotenv import load_dotenv
 load_dotenv()
 from django.utils.decorators import method_decorator
 from django.middleware.csrf import get_token
+import random
+import string
 
 
 cipher_suite = Fernet(os.getenv('STUDENT_CONFIG_KEY'))
@@ -206,6 +208,7 @@ class StudentConfigDataView(APIView):
             return JsonResponse({"status": "error", "message": f"All fields are required. Please fill all fields: {', '.join(missing_fields)}."}, status=status.HTTP_400_BAD_REQUEST)
 
         try:
+            print('First')
             conn_params = {
                 'host': config_data.get('host'),
                 'database': config_data.get('database'),
@@ -230,6 +233,7 @@ class StudentConfigDataView(APIView):
             return JsonResponse({"status": "error", "message": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
         try:
+            print('Last')
             student_data = StudentData.objects.get(id=id)
             if student_data:
                 encrypted_config = encrypt_data(config_data)
@@ -241,4 +245,3 @@ class StudentConfigDataView(APIView):
         except Exception as e:
             print(str(e))
             return JsonResponse({"status": "error", "message": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
-
