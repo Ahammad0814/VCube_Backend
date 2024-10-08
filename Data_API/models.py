@@ -57,6 +57,17 @@ class StudentAttendance(models.Model):
     BatchName = models.CharField(max_length=255, default='N/A')
     Date = models.CharField(max_length=255, default='N/A')
     Attendance_Type = models.CharField(max_length=255, default='N/A')
+
+class StudentWeeklyTestResults(models.Model):
+    StudentId = models.ForeignKey(StudentData, on_delete=models.CASCADE, related_name='weekly_test_results',null=True)
+    Image = models.TextField(default='N/A')
+    Name = models.CharField(max_length=255, default='N/A')
+    Course = models.CharField(max_length=255, default='N/A')
+    BatchName = models.CharField(max_length=255, default='N/A')
+    Date = models.CharField(max_length=255, default='N/A')
+    Status = models.CharField(max_length=255, default='N/A')
+    Score = models.CharField(max_length=255, default='0')
+    Time = models.CharField(max_length=255, default='0')
     
 class StudentWatchTimeData(models.Model):
     StudentId = models.ForeignKey(StudentData, on_delete=models.CASCADE, related_name='watchtime',null=True)
@@ -126,6 +137,7 @@ class AssessmentQuestionsData(models.Model):
     Test_Cases = models.JSONField(default=dict)
     Examples = models.JSONField(default=dict)
     Level = models.CharField(max_length=50)
+    WeeklyAssignment = models.CharField(max_length=255,default='No')
     
 class ClassRecordingsData(models.Model):
     Course = models.CharField(max_length=255,default='N/A')
@@ -142,7 +154,7 @@ class SendMail(models.Model):
     Email = models.CharField(max_length=255)
     OTP = models.JSONField(default=dict)
 
-class Report_Data(models.Model):
+class ReportData(models.Model):
     Date = models.CharField(max_length=255, default='N/A')
     Error_Type = models.TextField(default='N/A')
     Error_Message = models.TextField(default='N/A')
@@ -158,3 +170,9 @@ class UsersDriveData(models.Model):
     Size = models.CharField(max_length=255, default='N/A')
     Date = models.CharField(max_length=255, default='N/A')
     
+class StudentRequests(models.Model):
+    StudentId = models.ForeignKey(StudentData, on_delete=models.CASCADE, related_name='weekly_test_request',null=True)
+    Name = models.CharField(max_length=255, default='N/A')
+    Course = models.CharField(max_length=255, default='N/A')
+    BatchName = models.CharField(max_length=255, default='N/A')
+    Date = models.CharField(max_length=255, default='N/A')
