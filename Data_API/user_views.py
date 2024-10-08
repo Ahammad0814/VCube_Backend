@@ -362,7 +362,11 @@ class UsersDriveDataView(APIView):
         return Response(serializer.data, status=status.HTTP_200_OK)
 
     def post(self, request, username, course):
-        user, error_response, status_code = self.authenticate_user(request.data[0].get('Email'), username, course, request.data[0].get('DrivePassword'))
+        if request.data[0].get('Shared'):
+            Email = request.data[0].get('UserEmail')
+        else:
+            Email = request.data[0].get('Email')
+        user, error_response, status_code = self.authenticate_user(Email, username, course, request.data[0].get('DrivePassword'))
         if error_response:
             return Response(error_response, status=status_code)
 
@@ -384,8 +388,12 @@ class UsersDriveDataView(APIView):
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
     def patch(self, request, username, course, drive_id=None):
-        password = request.data.get('DrivePassword')
-        email = request.data.get('Email')
+        if isinstance(request.data, list):
+            password = request.data[0].get('DrivePassword')
+            email = request.data[0].get('Email')
+        else:
+            password = request.data.get('DrivePassword')
+            email = request.data.get('Email')
 
         user, error_response, status_code = self.authenticate_user(email, username, course, password)
         if error_response:
@@ -423,9 +431,14 @@ class UsersDriveDataView(APIView):
         return Response({'message': 'Invalid data format. Expected a list for batch update.'}, status=status.HTTP_400_BAD_REQUEST)
 
     def delete(self, request, username, course, drive_id=None):
-        password = request.data.get('DrivePassword')
-        email = request.data.get('Email')
-        foldername = request.data.get('Folder')
+        if isinstance(request.data, list):
+            password = request.data[0].get('DrivePassword')
+            email = request.data[0].get('Email')
+            foldername = request.data[0].get('Folder')
+        else:
+            password = request.data.get('DrivePassword')
+            email = request.data.get('Email')
+            foldername = request.data.get('Folder')
 
         user, error_response, status_code = self.authenticate_user(email, username, course, password)
         if error_response:
