@@ -56,8 +56,4 @@ urlpatterns = [
     path('execute-code/java/',code_execute.Execute_Java_Test_Cases.as_view(),name='execute-java'),
     path('execute-code/c/',code_execute.Execute_C_Test_Cases.as_view(),name='execute-c'),
     path('execute-code/cpp/',code_execute.Execute_CPP_Test_Cases.as_view(),name='execute-cpp'),
-    
-    
-    path('delete/all/students/', student_view.DeleteAllStudentsData.as_view()),
-
 ]
